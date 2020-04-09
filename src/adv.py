@@ -1,8 +1,9 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
-room = {
+
+roomsDictionary = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons"),
 
@@ -24,28 +25,50 @@ earlier adventurers. The only exit is to the south."""),
 
 # Link rooms together
 
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
+roomsDictionary['outside'].n_to = roomsDictionary['foyer']
+roomsDictionary['foyer'].s_to = roomsDictionary['outside']
+roomsDictionary['foyer'].n_to = roomsDictionary['overlook']
+roomsDictionary['foyer'].e_to = roomsDictionary['narrow']
+roomsDictionary['overlook'].s_to = roomsDictionary['foyer']
+roomsDictionary['narrow'].w_to = roomsDictionary['foyer']
+roomsDictionary['narrow'].n_to = roomsDictionary['treasure']
+roomsDictionary['treasure'].s_to = roomsDictionary['narrow']
 
-#
+
+# user_input = input("to move type n,s,e or w : ")
+
+# print(aaron.current_room.name)
+# aaron.move(user_input)
+# print(aaron.current_room.name)
+
+
 # Main
 #
 
-# Make a new player object that is currently in the 'outside' room.
+# Make a new player object that is currently in the 'outside' roomsDictionary.
 
 # Write a loop that:
 #
-# * Prints the current room name
+# * Prints the current roomsDictionary name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 #
-# If the user enters a cardinal direction, attempt to move to the room there.
+# If the user enters a cardinal direction, attempt to move to the roomsDictionary there.
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+user_name = input('type in username: ')
+user = Player(user_name, roomsDictionary['outside'])
+
+user_input = input("to move type n,s,e or w : ")
+
+
+while not user_input == 'q':
+    if user_input == 'n' or 's' or 'e' or 'w':
+        user.move(user_input)
+        print(user.current_room.name)
+        user_input = input("to move type n,s,e or w : ")
+else:
+    print('thanks for playing')
